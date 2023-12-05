@@ -5,27 +5,26 @@ from collections import Counter
 from typing import Iterable, Tuple, List, Any, Set
 from functools import cached_property, reduce
 
-'''
-from lib.multimap import *
-fn = MultiMap(items=[(1, "a"), (2, "b"), (2, "c"), (3, "c")])
-
-fn.domain
-fn.range
-
-fn.source(2)   # ["b", "c"]
-fn.target("c") # [2, 3]
-'''
-
 # Helper types to self document individual mappings
 Node = Any
 Relation = Tuple[Node, Node]
 
 
-# ABOUT: bi-directional many-to-many item mapping type supporting fast retrieval.
-# Behaves similar to a dictionary
-# Behaves similar to a list
-# No dangling nodes (ie: without relationships) are stored.
 class MultiMap:
+    """
+    Mutable collection type that bi-directionally stores mappings of source & destination
+    items. This type is similar to regular dictionaries except that it supports having
+    many-to-many relationships in the collection. This type is also similar to regular
+    tuple lists with added support for fast indexed lookup of items by source or destination
+    keys. All source & destinations must be hashable.
+
+    Item storage in internally handled by this class to save memory. Meaning any dangling
+    source or destination nodes without relationships are removed from the map. While this
+    type is memory based. The interface represents an abstraction between function vs memory
+    mapping implementations. That is, callers need not know weather a mapping is derived as
+    a computation or lookups. So all forward & backwards mappings of this type are possible
+    both via [] indices & () calls.
+    """
 
     # constructor
     def __init__(self, items: Iterable[Relation] = None):
@@ -151,20 +150,17 @@ class MultiMap:
     def __delitem__(self, item: Relation) -> 'MultiMap':
         src, dst = item
 
-        # specific source & destination
         if src != MultiMap.UNDEFINED and dst != MultiMap.UNDEFINED:
             self._decrement_frequency(self._sources, src, dst)
             self._decrement_frequency(self._targets, dst, src)
             return self
 
-        # all destinations from specific source
         if src != MultiMap.UNDEFINED:
             for dst in self._sources[src].keys():
                 self._decrement_frequency(self._targets, dst, src)
             del self._sources[src]
             return self
 
-        # all sources from specific destination
         if dst != MultiMap.UNDEFINED:
             for src in self._targets[dst].keys():
                 self._decrement_frequency(self._sources, src, dst)
