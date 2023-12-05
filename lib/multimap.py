@@ -23,7 +23,7 @@ class MultiMap:
     Item storage in internally handled by this class to save memory.
     Meaning any dangling source or destination nodes without
     relationships are removed from the map. While this type is memory
-    based. The interface represents an abstraction between function vs
+    based, the interface represents an abstraction between function vs
     memory mapping implementations. That is, callers need not know
     weather a mapping is derived as a computation or lookups. So all
     forward & backwards mappings of this type are possible via both
