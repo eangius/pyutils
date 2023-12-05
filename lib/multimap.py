@@ -12,18 +12,22 @@ Relation = Tuple[Node, Node]
 
 class MultiMap:
     """
-    Mutable collection type that bi-directionally stores mappings of source & destination
-    items. This type is similar to regular dictionaries except that it supports having
-    many-to-many relationships in the collection. This type is also similar to regular
-    tuple lists with added support for fast indexed lookup of items by source or destination
-    keys. All source & destinations must be hashable.
+    Mutable collection type that bi-directionally stores mappings
+    of source & destination items. This type is similar to regular
+    dictionaries except that it supports having many-to-many
+    relationships in the collection. This type is also similar to
+    regular tuple lists with added support for fast indexed lookup
+    of items by source or destination keys. All source & destinations
+    must be hashable.
 
-    Item storage in internally handled by this class to save memory. Meaning any dangling
-    source or destination nodes without relationships are removed from the map. While this
-    type is memory based. The interface represents an abstraction between function vs memory
-    mapping implementations. That is, callers need not know weather a mapping is derived as
-    a computation or lookups. So all forward & backwards mappings of this type are possible
-    both via [] indices & () calls.
+    Item storage in internally handled by this class to save memory.
+    Meaning any dangling source or destination nodes without
+    relationships are removed from the map. While this type is memory
+    based. The interface represents an abstraction between function vs
+    memory mapping implementations. That is, callers need not know
+    weather a mapping is derived as a computation or lookups. So all
+    forward & backwards mappings of this type are possible via both
+    [] indices & () calls.
     """
 
     # constructor
