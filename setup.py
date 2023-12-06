@@ -1,6 +1,6 @@
 #!usr/bin/env python
 
-import source as proj
+import pyutils as proj
 import setuptools
 import sys
 
@@ -18,11 +18,15 @@ setuptools.setup(
     url=f'https://github.com/eangius/{proj.__name__}',
     author='Elian Angius',
     license=PROJ_LICENSE,
-    packages=[proj.__name__],
+    packages=setuptools.find_packages(
+        where='.',
+        include=[f'{proj.__name__}*'],
+        exclude=['tests'],
+    ),
     keywords='utilities',
 
     # Dependencies to auto install.
-    python_requires=f'>={PY_VERSION.major}.${PY_VERSION.minor}',
+    python_requires=f'>={PY_VERSION.major}.{PY_VERSION.minor}',
     install_requires=[],
     platforms=["any"],
 
