@@ -94,7 +94,7 @@ function fn_document() {
 }
 
 
-# ABOUT: package software
+# ABOUT: package software & verify against test pypi index
 function fn_package() {
   echo -e ">> Packaging project ..";
   python setup.py \
@@ -109,10 +109,10 @@ cmd=${1} && shift 1;
 case ${cmd} in
   --install | install)    fn_install "${@}";;
   --compile | compile)    fn_compile "${@}";;
-  --document | document)  fn_document "${@}";;
+  --doc | doc)            fn_document "${@}";;
   --test | test)          fn_test "${@}";;
   --repl | repl)          fn_repl "${@}";;
-  --package | package)    fn_package "${@}";;
+  --pkg | pkg)            fn_package "${@}";;
   --all | all)            fn_install && \
                           fn_compile && \
                           fn_document && \

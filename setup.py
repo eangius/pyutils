@@ -50,9 +50,9 @@ class CleanCommand(Command):
 
 setuptools.setup(
     # Metadata
-    name=proj.__name__,
+    name=f"eliangius-{proj.__name__}",  # unique for pypi
     version=proj.__version__,
-    description='',
+    description='Custom python utilities & types for reuse.',
     url=f'https://github.com/eangius/{proj.__name__}',
     author='Elian Angius',
     license=PROJ_LICENSE,
@@ -68,6 +68,7 @@ setuptools.setup(
     install_requires=[],
     platforms=["any"],
 
+    # pypi tags see: https://gist.github.com/nazrulworld/3800c84e28dc464b2b30cec8bc1287fc
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Operating System :: OS Independent",
@@ -75,10 +76,10 @@ setuptools.setup(
         "Environment :: Plugins",
         "Intended Audience :: Developers",
         f"License :: OSI Approved :: {PROJ_LICENSE} License",
-        "Topic :: Library",
+        "Topic :: Software Development :: Libraries"
     ],
 
-    # custom commands
+    # Custom commands
     cmdclass={
         'clean': CleanCommand,
     },
