@@ -98,12 +98,13 @@ function fn_document() {
 # ABOUT: public deploy package to python index
 function fn_deploy() {
   echo -e ">> Packaging project ..";
-  local PYPI_API_TOKEN = '';
-  local PYPI_SERVER = "testpypi";
+  local PYPI_API_TOKEN='pypi-AgEIcHlwaS5vcmcCJDEwOWVkNmE3LTMxNDEtNGU2NC1hZDliLWUyZGYzMTI4YmMxYQACKlszLCI5MmY4ZWJmNC1mYWI1LTQ5MTAtYmM0OC1jODdmZjQ4Njg4ZGUiXQAABiDtd48kEf9tpqFi2eC-qo-YMIKWA75fQrn81wxdQdW6rw';
+  local PYPI_SERVER="pypi";
   twine upload \
     --username __token__ \
     --password "${PYPI_API_TOKEN}" \
-    --repository "${PYPI_SERVER}" dist/*;
+    --repository "${PYPI_SERVER}" \
+    dist/*;
 }
 
 

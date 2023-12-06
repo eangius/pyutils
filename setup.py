@@ -50,7 +50,7 @@ class CleanCommand(Command):
 
 setuptools.setup(
     # Metadata
-    name=f"eliangius-{proj.__name__}",  # unique for pypi
+    name=f"eangius-{proj.__name__}",  # unique for pypi
     version=proj.__version__,
     description='Custom python utilities & types for reuse.',
     url=f'https://github.com/eangius/{proj.__name__}',
