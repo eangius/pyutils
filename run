@@ -98,7 +98,7 @@ function fn_document() {
 function fn_package() {
   echo -e ">> Packaging project ..";
   python setup.py \
-    clean --all \
+    clean \
     sdist \
     egg_info --egg-base /tmp;
 }
