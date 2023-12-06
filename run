@@ -25,8 +25,8 @@ function fn_help() {
   if [ ${1:-'install'} == 'install' ]; then
       printf "${format}" "${app} --install;                    # install dependencies";
   fi;
-  if [ ${1:-'compile'} == 'compile' ]; then
-      printf "${format}" "${app} --compile;                    # cythonize code modules";
+  if [ ${1:-'build'} == 'build' ]; then
+      printf "${format}" "${app} --build;                      # compile & packages code";
   fi;
   if [ ${1:-'document'} == 'document' ]; then
       printf "${format}" "${app} --document;                   # generate documentation";
@@ -37,8 +37,8 @@ function fn_help() {
   if [ ${1:-'repl'} == 'repl' ]; then
       printf "${format}" "${app} --repl                        # launch a python console";
   fi;
-  if [ ${1:-'package'} == 'package' ]; then
-      printf "${format}" "${app} --package;                    # package for distribution";
+  if [ ${1:-'deploy'} == 'deploy' ]; then
+      printf "${format}" "${app} --deploy;                     # deploy packages";
   fi;
   if [ ${1:-'all'} == 'all' ]; then
       printf "${format}" "${app} --all;                        # end-to-end flow";
@@ -56,8 +56,8 @@ function fn_install() {
 }
 
 
-# ABOUT: cythonizes respective code modules
-function fn_compile() {
+# ABOUT: cythonizes respective code modules & packages them
+function fn_build() {
   echo -e ">> Building project ..";
   local build_dir="/tmp";
   python setup.py clean && \
@@ -67,7 +67,8 @@ function fn_compile() {
     --inplace \
     --parallel "$(sysctl -n hw.ncpu || echo 1)" \
     --force \
-    --quiet;
+    --quiet &&
+  python setup.py sdist egg_info --egg-base "${build_dir}";
 }
 
 
@@ -94,13 +95,15 @@ function fn_document() {
 }
 
 
-# ABOUT: package software & verify against test pypi index
-function fn_package() {
+# ABOUT: public deploy package to python index
+function fn_deploy() {
   echo -e ">> Packaging project ..";
-  python setup.py \
-    clean \
-    sdist \
-    egg_info --egg-base /tmp;
+  local PYPI_API_TOKEN = '';
+  local PYPI_SERVER = "testpypi";
+  twine upload \
+    --username __token__ \
+    --password "${PYPI_API_TOKEN}" \
+    --repository "${PYPI_SERVER}" dist/*;
 }
 
 
@@ -108,16 +111,16 @@ function fn_package() {
 cmd=${1} && shift 1;
 case ${cmd} in
   --install | install)    fn_install "${@}";;
-  --compile | compile)    fn_compile "${@}";;
+  --build | build)        fn_build "${@}";;
   --doc | doc)            fn_document "${@}";;
   --test | test)          fn_test "${@}";;
   --repl | repl)          fn_repl "${@}";;
-  --pkg | pkg)            fn_package "${@}";;
+  --deploy | deploy)      fn_deploy "${@}";;
   --all | all)            fn_install && \
-                          fn_compile && \
+                          fn_build && \
                           fn_document && \
                           fn_test && \
-                          fn_package;;
+                          fn_deploy;;
   --help | help | *)      fn_help "${@}";;
 esac
 exit 0;
