@@ -1,6 +1,5 @@
 #!usr/bin/env python
-
-from lib.multimap import *
+from python_utils.multimap import *
 import pytest
 import random
 import string

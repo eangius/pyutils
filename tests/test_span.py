@@ -1,6 +1,6 @@
 #!usr/bin/env python
 
-from lib.span import *
+from python_utils.span import *
 import pytest
 
 
