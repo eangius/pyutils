@@ -32,7 +32,7 @@ class Option(ABC):
     def map_try(self, fn: Callable = lambda x: x):
         try:
             result = self.map(fn)
-        except:
+        except Exception:
             result = Nothing()
         return result
 
