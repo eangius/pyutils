@@ -1,5 +1,3 @@
-# ABOUT: python optional requiremenets for testing code quality.
-
 cython                          # optimized python
 pytest                          # unit test
 pytest-benchmark                # test runtime profile
