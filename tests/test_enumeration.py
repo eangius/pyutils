@@ -1,6 +1,6 @@
 #!usr/bin/env python
 
-from python_utils.enumeration import *
+from pyutils.enumeration import *
 import pytest
 
 

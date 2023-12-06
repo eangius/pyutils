@@ -1,6 +1,6 @@
 #!usr/bin/env python
 
-from python_utils.option import *
+from pyutils.option import *
 import pytest
 
 

@@ -1,6 +1,6 @@
 #!usr/bin/env python
 
-from python_utils.dictionary import *
+from pyutils.dictionary import *
 import pytest
 import datetime
 
