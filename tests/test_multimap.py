@@ -7,24 +7,28 @@ import string
 
 
 # Maps equal itself
+@pytest.mark.unit
 def test__multimap_equality00(data):
     relations = MultiMap(data)
     assert relations == relations
 
 
 # Maps equal content of identical self.
+@pytest.mark.unit
 def test__multimap_equality01(data):
     relations = MultiMap(data)
     assert relations == MultiMap(data)
 
 
 # Two maps with different relationships should not equal.
+@pytest.mark.unit
 def test__multimap_equality02(data, random_item):
     relations = MultiMap(data)
     assert relations != MultiMap([random_item])
 
 
 # Empty data should have empty source & targets
+@pytest.mark.unit
 def test__multimap_items00():
     relations = MultiMap()
     assert relations.domain == set()
@@ -32,6 +36,7 @@ def test__multimap_items00():
 
 
 # Ensure non-duplicate sources & targets are returned.
+@pytest.mark.unit
 def test__multimap_items01(data):
     relations = MultiMap(data)
     assert relations.domain == {1, 2, 3, 4, None}
@@ -39,11 +44,13 @@ def test__multimap_items01(data):
 
 
 # Empty data should have no memberships
+@pytest.mark.unit
 def test__multimap_membership00(data):
     assert (-1, 'z') not in MultiMap(data)
 
 
 # Check for existing & non existing items.
+@pytest.mark.unit
 def test__multimap_membership01(data):
     relations = MultiMap(data)
     assert (1, 'a') in relations
@@ -56,6 +63,7 @@ def test__multimap_membership01(data):
 
 
 # Retrieving data should preserve dupes.
+@pytest.mark.unit
 def test__multimap_iterations01(data):
     relations = MultiMap(data)
     assert list(relations) == data
@@ -63,6 +71,7 @@ def test__multimap_iterations01(data):
 
 
 # Arithmatic addition of relationships should yield union
+@pytest.mark.unit
 def test__multimap_collection01():
     m1 = MultiMap([(1, 'a'), (2, 'b')])
     m2 = MultiMap([(1, 'a')])
@@ -73,6 +82,7 @@ def test__multimap_collection01():
 
 
 # Arithmatic subtraction of relationships should yield difference
+@pytest.mark.unit
 def test__multimap_collection02():
     m1 = MultiMap([(1, 'a'), (2, 'b')])
     m2 = MultiMap([(1, 'a'), (1, 'a')])
@@ -83,12 +93,14 @@ def test__multimap_collection02():
 
 
 # Ensure relations are iterable (without exceptions)
+@pytest.mark.unit
 def test__multimap_iterable01(data):
     relations = MultiMap(data)
     assert list(relations) == list(relations.items())
 
 
 # Ensure next of relationships changes.
+@pytest.mark.unit
 def test__mutimap_iterable02():
     relations = MultiMap([(1, 'a'), (2, 'b')])
     item = iter(relations)
@@ -96,11 +108,13 @@ def test__mutimap_iterable02():
 
 
 # Inverting empty yields empty
+@pytest.mark.unit
 def test_multimap_inverse00():
     assert MultiMap().inverse() == MultiMap()
 
 
 # Inverse all relationships as a new mapping.
+@pytest.mark.unit
 def test__multimap_inverse01(data):
     original = MultiMap(data)
     relations = original.inverse()
@@ -114,6 +128,7 @@ def test__multimap_inverse01(data):
 
 
 # Inverse all relationships in place.
+@pytest.mark.unit
 def test__multimap_inverse02(data):
     original = MultiMap(data)
     original_items = list(original)
@@ -127,24 +142,28 @@ def test__multimap_inverse02(data):
 
 
 # Epty data should have empty cardinality
+@pytest.mark.unit
 def test__multimap_cardinality00():
     relations = MultiMap()
     assert len(relations) == relations.size() == 0
 
 
 # Count cardinality of all relationships
+@pytest.mark.unit
 def test__multimap_cardinality01(data):
     relations = MultiMap(data)
     assert len(relations) == relations.size() == 9
 
 
 # Retrieving non existing sources should not fail
+@pytest.mark.unit
 def test__multimap_get00():
     relations = MultiMap()
     assert relations(0) == relations[0] == []    # non existing source
 
 
 # Retrieving sources as functions or indices
+@pytest.mark.unit
 def test__multimap_get01(data):
     relations = MultiMap(data)
     assert relations(1) == relations[1] == ['a']
@@ -155,6 +174,7 @@ def test__multimap_get01(data):
 
 
 # Bi-directional mapping from defined nodes should yield (possibly duplicated) relationships.
+@pytest.mark.unit
 def test__multimap_get02(data):
     relations = MultiMap(data)
     assert relations.source(2) == ['a', 'c', 'c']
@@ -162,6 +182,7 @@ def test__multimap_get02(data):
 
 
 # Bi-directional mapping from undefined nodes should yield empty relationships
+@pytest.mark.unit
 def test__multimap_get04(data):
     relations = MultiMap(data)
     assert relations.source(99) == []
@@ -169,6 +190,7 @@ def test__multimap_get04(data):
 
 
 # Inserting items should add to the relationship
+@pytest.mark.unit
 def test__multimap_insert01(random_item):
     original = MultiMap()
     relations = original.add(*random_item)
@@ -177,6 +199,7 @@ def test__multimap_insert01(random_item):
 
 
 # Inserting duplicate items should add to the relation
+@pytest.mark.unit
 def test__multimap_insert02(random_item):
     original = MultiMap([random_item])
     relations = original.add(*random_item)
@@ -185,6 +208,7 @@ def test__multimap_insert02(random_item):
 
 
 # Inserting illegal items should silently reject operation
+@pytest.mark.unit
 def test__multimap_insert03(random_item):
     src, dst = random_item
     assert MultiMap().add(src, MultiMap.UNDEFINED) == MultiMap()
@@ -193,6 +217,7 @@ def test__multimap_insert03(random_item):
 
 
 # Removing (possibly duplicated) specific items should drop one of the relationships
+@pytest.mark.unit
 def test__multimap_delete01():
     original = MultiMap([(1, "a"), (2, "c"), (2, "c")])
     relations = original.remove(2, "c")
@@ -201,6 +226,7 @@ def test__multimap_delete01():
 
 
 # Removing specific sources should drop all linked targets.
+@pytest.mark.unit
 def test__multimap_delete02():
     original = MultiMap([(1, "a"), (2, "a"), (2, "c")])
     relations = original.remove(2, MultiMap.UNDEFINED)
@@ -209,6 +235,7 @@ def test__multimap_delete02():
 
 
 # Removing specific targets should drop all linked sources.
+@pytest.mark.unit
 def test__multimap_delete03():
     original = MultiMap([(1, "a"), (2, "a"), (2, "c")])
     relations = original.remove(MultiMap.UNDEFINED, "a")
@@ -217,6 +244,7 @@ def test__multimap_delete03():
 
 
 # Removing all source & targets should empty the mapping.
+@pytest.mark.unit
 def test__multimap_delete04():
     original = MultiMap([(1, "a"), (2, "a"), (2, "c")])
     relations = original.remove(MultiMap.UNDEFINED, MultiMap.UNDEFINED)
@@ -225,6 +253,7 @@ def test__multimap_delete04():
 
 
 # Removing data from empty state should have no effect.
+@pytest.mark.unit
 def test__multimap_clear00():
     original = MultiMap()
     relations = original.clear()
@@ -235,6 +264,7 @@ def test__multimap_clear00():
 
 
 # Removing items should clear all state & return same object
+@pytest.mark.unit
 def test__multimap_clear01(data):
     original = MultiMap(data)
     relations = original.clear()
@@ -245,6 +275,7 @@ def test__multimap_clear01(data):
 
 
 # Copying a mapping should provide a shallow copy of items in a different container.
+@pytest.mark.unit
 def test__multimap_clone01(data):
     original = MultiMap(data)
     relations = original.copy()
