@@ -28,8 +28,8 @@ function fn_help() {
   if [ ${1:-'build'} == 'build' ]; then
       printf "${format}" "${app} --build;                      # compile & packages code";
   fi;
-  if [ ${1:-'document'} == 'document' ]; then
-      printf "${format}" "${app} --document;                   # generate documentation";
+  if [ ${1:-'doc'} == 'doc' ]; then
+      printf "${format}" "${app} --doc;                        # generate documentation";
   fi;
   if [ ${1:-'test'} == 'test' ]; then
       printf "${format}" "${app} --test <path/test_*.py>;      # perform unit & integration tests";
@@ -92,6 +92,7 @@ function fn_repl() {
 # ABOUT: build technical documentation
 function fn_document() {
   echo -e ">> Documenting codebase ..";
+  mkdocs serve;
 }
 
 
