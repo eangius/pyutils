@@ -1,6 +1,6 @@
 site_name: eangius-pyutils
-site_url: https://eangius.github.io/pyutils
-repo_url: https://github.com/eangius/pyutils
+site_url: https://eangius.github.io/pyutils/
+repo_url: https://github.com/eangius/pyutils/
 copyright: Copyright &copy; <a href="https://github.com/eangius">eangius</a>.
 
 
@@ -11,14 +11,11 @@ theme:
     - navigation.indexes
 
 plugins:
-  - mkdocstrings:
-      watch:
-        - pyutils/
-  - search:
-      min_search_length: 3
-      separator: '[\s\-\.]+'
+  - mkdocstrings
+  - search
 
 nav:
+  - About: 'index.md'
   - References:
     - 'api_multimap.md'
   - Examples: 'examples.md'
