@@ -1,0 +1,3 @@
+mkdocs                          # build static markdown
+mkdocstrings[python]            # auto generate from docstrings
+mkdocs-material                 # style documentations

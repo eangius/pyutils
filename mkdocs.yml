@@ -1,0 +1,30 @@
+site_name: eangius-pyutils
+site_url: https://eangius.github.io/pyutils
+repo_url: https://github.com/eangius/pyutils
+copyright: Copyright &copy; <a href="https://github.com/eangius">eangius</a>.
+
+
+theme:
+  name: readthedocs
+  locale: en
+  features:
+    - navigation.indexes
+
+plugins:
+  - mkdocstrings:
+      watch:
+        - pyutils/
+  - search:
+      min_search_length: 3
+      separator: '[\s\-\.]+'
+
+nav:
+  - References:
+    - 'api_multimap.md'
+  - Examples: 'examples.md'
+
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
