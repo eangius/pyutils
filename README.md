@@ -1,7 +1,13 @@
 # Python Utilities
-![pkg](https://img.shields.io/pypi/v/eangius-pyutils.svg)
-[![docs](https://img.shields.io/badge/docs-passing-green.svg)](https://eangius.github.io/pyutils/)
-[![build](https://img.shields.io/github/actions/workflow/status/eangius/pyutils/testing.yml?branch=master)](https://github.com/eangius/pyutils/actions)
+[![pkg](https://img.shields.io/pypi/v/eangius-pyutils.svg)](
+  https://pypi.org/project/eangius-pyutils/
+)
+[![docs](https://img.shields.io/badge/docs-passing-green.svg)](
+	https://eangius.github.io/pyutils/
+)
+[![build](https://img.shields.io/github/actions/workflow/status/eangius/pyutils/testing.yml?branch=master)](
+	https://github.com/eangius/pyutils/actions
+)
 
 
 
