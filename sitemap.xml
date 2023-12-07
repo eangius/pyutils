@@ -1,3 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://eangius.github.io/pyutils/index.html</loc>
+         <lastmod>2023-12-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://eangius.github.io/pyutils/api_multimap.html</loc>
+         <lastmod>2023-12-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://eangius.github.io/pyutils/examples.html</loc>
+         <lastmod>2023-12-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
 </urlset>
