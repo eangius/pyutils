@@ -1,6 +1,8 @@
-site_name: eangius-pyutils
-site_url: https://eangius.github.io/pyutils/
+site_name: "eangius-pyutils"
 repo_url: https://github.com/eangius/pyutils/
+site_url: https://eangius.github.io/pyutils/
+use_directory_urls: false
+remote_branch: gh-pages
 copyright: Copyright &copy; <a href="https://github.com/eangius">eangius</a>.
 
 
