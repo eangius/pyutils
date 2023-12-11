@@ -18,7 +18,7 @@ Collection of general purpose python utilities & types build over the years for 
 
 ### For Users
 ```sh
-pip install eliangius-pyutils;  # load library into projects
+pip install eangius-pyutils;  # load library into projects
 ```
 
 ### For Developers
